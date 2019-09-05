@@ -1,13 +1,11 @@
 let express = require('express');
-//var BodyParser = require('body-parser');
-//var validator = require('express-joi-validator');
+ 
 var Joi = require('joi');
 var MongoClient = require('mongodb').MongoClient;
 const jwt = require('jsonwebtoken');
 var app = express();
 app.use(express.json());
-//var userRegisterData = [];
-//user registered validation
+ 
 const userSchema = Joi.object().keys({
     name: Joi.string().required(),
     email: Joi.string().email().required(),
@@ -20,7 +18,7 @@ app.post('/register', (req, res) => {
     Joi.validate(req.body, userSchema, (err, data) => {
         if (err) res.send('you entered a invalid data');
         else {
-            // let user:{ email, password } = req.body;
+            
             user = {
                 email: req.body.email,
                 password: req.body.password
@@ -34,7 +32,7 @@ app.post('/register', (req, res) => {
                         console.log('database connected......');
                         let flag = 0;
                         await db.db('userDatabase').collection('userDetails').find().forEach((element) => {
-                            //console.log((element));
+                            
                             if (user.email == element.email) {
                                 flag = 1
                             }
@@ -46,8 +44,7 @@ app.post('/register', (req, res) => {
                         else {
 
                             try {
-                                // var token = jwt.sign({ password }, "privateKey", { algorithm: 'HS256' });
-                                //data.password = token;
+                                
                                 MongoClient.connect("mongodb://localhost:27017", async (err, db) => {
 
                                     if (err) throw err;
@@ -85,10 +82,7 @@ let loginData = Joi.object().keys({
 }
 )
 app.post('/login', (req, res) => {
-
-    // //Joi.validate(req.query, loginData, (err, data) => {
-    //     if (err) res.send('invalid format......');
-    //     else {
+ 
 
     let loginData = {
         email: req.body.email,
@@ -114,7 +108,7 @@ app.post('/login', (req, res) => {
                     )
                 }
                 else res.send('invalid your email or password');
-            }
+            } //console.log((element));
         });
     }
     catch (e) {
