@@ -1,0 +1,25 @@
+db.getCollection('post').aggregate([{$group:{_id:"$_id",
+     "totalComments": {
+            "$sum": {
+                "$size": {
+                    "$filter": {
+                        "input": "$mypostInfo.comments",
+                         as: "comments",
+               cond: { $ne: [ "$$comments.msg",null]}
+                        }
+                    }
+                }
+            },mylike:{$push:"$mylike"},threeComments:{$push: {$slice: [ "$mypostInfo.likes", 3 ] }
+                        },
+            "totallikes": {
+            "$sum": {
+                "$size": {
+                    "$filter": {
+                        "input": "$mypostInfo.likes",
+                         as: "likes",
+               cond: { $ne: [ "$$likes.msgId",null]}
+                        }
+                    }
+                }
+            }
+        }},{$limit:10}])
