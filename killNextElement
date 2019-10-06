@@ -1,0 +1,85 @@
+#include <stdio.h>
+
+int main() {
+int i,n,k,j,len,x,a[100],flag,value,result,count=0,m;
+scanf("%d",&n);
+for(i=0;i<n;i++)
+{
+    scanf("%d",&a[i]);
+}
+len=n;
+for(value=0;value<n;value++){
+    if(len==1)
+    break;
+    count=0;
+    if(len%2==0){
+for(k=count;k<n-1;k++)
+{ x=count;
+         while(a[x]==0&&count<n)
+        {
+            count++;
+            x++;
+             
+        }count++;
+        while(count<n)
+        {
+            if(a[count]!=0)
+            {
+                printf("kill %d\n",a[count]);
+                 a[count]=0;
+                  count++;
+                 len--;
+                    // printf("len=%d",len);
+
+                 break;
+            }
+           else count++;
+        }
+ }}
+//for odd 
+if(len%2==1){
+    printf("len=%d\n",len);
+    m=0;
+    count=0;
+for(k=count;k<n-1;k++)
+{ x=count;
+  
+        while(a[x]==0&&count<n)
+        {
+            count++;
+            x++;
+            
+        }count++;
+        while(count<n)
+        {
+            if(a[count]!=0)
+            {  printf("kill %d\n",a[count]);
+                 a[count]=0;
+                 count++;
+                 len--;
+                 break;
+            }
+          else count++;
+        }
+}
+    printf("going to kill initial element\n");
+    if(len!=1){
+    while(a[m]==0)
+    {
+        m++;
+    }
+    a[m]=0;
+    len--;
+    
+    }
+}
+
+ for(j=0;j<n;j++)
+{  
+    printf("%d ",a[j]);
+
+}
+}
+
+	return 0;
+}
